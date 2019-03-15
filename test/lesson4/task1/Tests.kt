@@ -154,6 +154,15 @@ class Tests {
     }
 
     @Test
+//    @Tag("Normal")
+    fun nextPrime() {
+        assertEquals(3, nextPrime(2))
+        assertEquals(5, nextPrime(3))
+        assertEquals(7, nextPrime(5))
+        assertEquals(13, nextPrime(11))
+    }
+
+    @Test
     @Tag("Normal")
     fun factorize() {
         assertEquals(listOf(2), factorize(2))
