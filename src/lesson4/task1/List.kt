@@ -188,16 +188,41 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
-
-fun nextPrime(n: Int): Int {
-    var p = n
-    do {
-        p++
-        var flag = IntRange(2, sqrt(p.toDouble()).toInt() + 1).toList().map { if (p % it > 0) 1 else 0 }.sum()
-    } while (flag == 0)
-    return p
+fun factorize(n: Int): List<Int> {
+    val list = mutableListOf<Int>()
+    val primes = resheto(n)
+    var N = n
+    var p = 0
+    while (N > 1) {
+        while (N % primes[p] > 0) {
+            p++
+        }
+        list.add(primes[p])
+        N /= primes[p]
+        p = 0
+    }
+    return list.sorted()
 }
+
+fun resheto(p: Int): List<Int> {
+    val list = IntRange(0, p).toMutableList()
+    list.map { 1 }
+    list[0] = 0
+    list[1] = 0
+    var i = 2
+    while (i * i <= p) {
+        var j = i * i
+        while (j <= p) {
+            list[j] = 0
+            j += i
+        }
+        while (++i < list.size && list[i] == 0) {
+        }
+    }
+    for (i in 2 until list.size) if (list[i] > 0) list[i] = i
+    return list.filter { it > 0 }
+}
+
 /**
  * Сложная
  *
@@ -205,8 +230,29 @@ fun nextPrime(n: Int): Int {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+/*
+fun nextPrime2(n: Int): Int {
+    var p = n
+    when (p) {
+        2 -> p = 3
+        3 -> p = 5
+        else -> do {
+            p++
+            val flag = true
+            val li = IntRange(2, sqrt(p.toDouble()).toInt() + 1).toList()
+            for (i in 0..li.size) {
+                if (p % li[i] == 0) {
 
+                    break
+                }
+            }
+        } while (.map { if (p % it > 0) 1 else 0 }.sum() == 0
+            )
+    }
+    return p
+}
+*/
 /**
  * Средняя
  *
