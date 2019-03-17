@@ -192,17 +192,24 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     val primes = resheto(n)
     var N = n
-    var p = 0
     while (N > 1) {
+        var p = 0
         while (N % primes[p] > 0) {
             p++
         }
         list.add(primes[p])
         N /= primes[p]
-        p = 0
     }
     return list.sorted()
 }
+
+fun tt(x: Int): Boolean {
+    val list = mutableListOf<Int>()
+    for (i in 0..x)
+        list.add(1)
+    return true
+}
+
 
 fun resheto(p: Int): List<Int> {
     val list = IntRange(0, p).toMutableList()
